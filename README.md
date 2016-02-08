@@ -23,12 +23,12 @@ BenchmarkMohaeUvarintAll            	10000000	       167 ns/op	  47.66 MB/s	    
 The `*MinLen` benchmarks use a value that encodes to 1 byte.  This shows the best-case scenario for encoding/decoding operations.  This is usually the most common case.
 
 ```
-BenchmarkCockroachDBPutUvarintMinLen	500000000	         3.61 ns/op	2215.80 MB/s	       0 B/op	       0 allocs/op
-BenchmarkCockroachDBUvarintMinLen   	300000000	         4.17 ns/op	1918.88 MB/s	       0 B/op	       0 allocs/op
-BenchmarkDchestPutUint64MinLen      	500000000	         3.33 ns/op	2399.68 MB/s	       0 B/op	       0 allocs/op
-BenchmarkDchestUint64MinLen         	500000000	         3.52 ns/op	2270.33 MB/s	       0 B/op	       0 allocs/op
-BenchmarkMohaePutUvarintMinLen      	500000000	         3.31 ns/op	2415.08 MB/s	       0 B/op	       0 allocs/op
-BenchmarkMohaeUvarintMinLen         	500000000	         3.56 ns/op	2246.06 MB/s	       0 B/op	       0 allocs/op
+BenchmarkCockroachDBPutUvarintMinLen	500000000	         3.61 ns/op    2215.80 MB/s	       0 B/op	       0 allocs/op
+BenchmarkCockroachDBUvarintMinLen   	300000000	         4.17 ns/op    1918.88 MB/s	       0 B/op	       0 allocs/op
+BenchmarkDchestPutUint64MinLen      	500000000	         3.33 ns/op    2399.68 MB/s	       0 B/op	       0 allocs/op
+BenchmarkDchestUint64MinLen         	500000000	         3.52 ns/op    2270.33 MB/s	       0 B/op	       0 allocs/op
+BenchmarkMohaePutUvarintMinLen      	500000000	         3.31 ns/op    2415.08 MB/s	       0 B/op	       0 allocs/op
+BenchmarkMohaeUvarintMinLen         	500000000	         3.56 ns/op    2246.06 MB/s	       0 B/op	       0 allocs/op
 ```
 
 ### MaxLen
