@@ -5,20 +5,20 @@ import (
 	"testing"
 
 	"github.com/dchest/varuint"
-	"github.com/mohae/varint"
+	"github.com/mohae/uvarint"
 )
 
-func TestVarInt(t *testing.T) {
+func TestUvarint(t *testing.T) {
 	for i, test := range tests {
 		b := make([]byte, len(test.encoded))
-		n := varint.PutUint64(b, test.decoded)
+		n := uvarint.PutUvarint(b, test.decoded)
 		if n != test.n {
 			t.Errorf("encode %d: got %d want %d", i, n, test.n)
 		}
 		if !bytes.Equal(b, test.encoded) {
 			t.Errorf("encode %d: got %v want %v", i, b[0:n], test.encoded)
 		}
-		v, n := varint.Uint64(test.encoded)
+		v, n := uvarint.Uvarint(test.encoded)
 		if n != test.n {
 			t.Errorf("decode %d: got %d want %d", i, n, test.n)
 		}
@@ -28,7 +28,7 @@ func TestVarInt(t *testing.T) {
 	}
 }
 
-func TestVarUint(t *testing.T) {
+func TestVaruint(t *testing.T) {
 	for i, test := range tests {
 		b := make([]byte, len(test.encoded))
 		n := varuint.PutUint64(b, test.decoded)
@@ -38,7 +38,27 @@ func TestVarUint(t *testing.T) {
 		if !bytes.Equal(b, test.encoded) {
 			t.Errorf("encode %d: got %v want %v", i, b[0:n], test.encoded)
 		}
-		v, n := varint.Uint64(test.encoded)
+		v, n := varuint.Uint64(test.encoded)
+		if n != test.n {
+			t.Errorf("decode %d: got %d want %d", i, n, test.n)
+		}
+		if v != test.decoded {
+			t.Errorf("decode %d: got %d want %d", i, v, test.decoded)
+		}
+	}
+}
+
+func TestCoackroach(t *testing.T) {
+	for i, test := range tests {
+		b := make([]byte, len(test.encoded))
+		n := putUvarint(b, test.decoded)
+		if n != test.n {
+			t.Errorf("encode %d: got %d want %d", i, n, test.n)
+		}
+		if !bytes.Equal(b, test.encoded) {
+			t.Errorf("encode %d: got %v want %v", i, b[0:n], test.encoded)
+		}
+		v, n := getUvarint(test.encoded)
 		if n != test.n {
 			t.Errorf("decode %d: got %d want %d", i, n, test.n)
 		}

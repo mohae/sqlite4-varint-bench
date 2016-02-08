@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/dchest/varuint"
-	"github.com/mohae/varint"
+	"github.com/mohae/uvarint"
 )
 
 var tests = []struct {
@@ -37,7 +37,7 @@ var tests = []struct {
 }
 
 // Bench for all tests
-func BenchmarkCockroachDBPutUint64All(b *testing.B) {
+func BenchmarkCockroachDBPutUvarintAll(b *testing.B) {
 	buf := make([]byte, 9)
 	var n int
 	b.SetBytes(8)
@@ -49,7 +49,7 @@ func BenchmarkCockroachDBPutUint64All(b *testing.B) {
 	_ = n
 }
 
-func BenchmarkCockroachDBUint64All(b *testing.B) {
+func BenchmarkCockroachDBUvarintAll(b *testing.B) {
 	var res uint64
 	b.SetBytes(8)
 	for i := 0; i < b.N; i++ {
@@ -83,31 +83,31 @@ func BenchmarkDchestUint64All(b *testing.B) {
 	_ = res
 }
 
-func BenchmarkMohaePutUint64All(b *testing.B) {
+func BenchmarkMohaePutUvarintAll(b *testing.B) {
 	buf := make([]byte, 9)
 	var n int
 	b.SetBytes(8)
 	for i := 0; i < b.N; i++ {
 		for _, test := range tests {
-			n = varint.PutUint64(buf, test.decoded)
+			n = uvarint.PutUvarint(buf, test.decoded)
 		}
 	}
 	_ = n
 }
 
-func BenchmarkMohaeUint64All(b *testing.B) {
+func BenchmarkMohaeUvarintAll(b *testing.B) {
 	var res uint64
 	b.SetBytes(8)
 	for i := 0; i < b.N; i++ {
 		for _, test := range tests {
-			res, _ = varint.Uint64(test.encoded)
+			res, _ = uvarint.Uvarint(test.encoded)
 		}
 	}
 	_ = res
 }
 
 // Single encode: use < 241 (fastest)
-func BenchmarkCockroachDBPutUint64MinLen(b *testing.B) {
+func BenchmarkCockroachDBPutUvarintMinLen(b *testing.B) {
 	buf := make([]byte, 9)
 	var n int
 	b.SetBytes(8)
@@ -117,7 +117,7 @@ func BenchmarkCockroachDBPutUint64MinLen(b *testing.B) {
 	_ = n
 }
 
-func BenchmarkCockroachDBUint64MinLen(b *testing.B) {
+func BenchmarkCockroachDBUvarintMinLen(b *testing.B) {
 	var res uint64
 	b.SetBytes(8)
 	for i := 0; i < b.N; i++ {
@@ -145,27 +145,27 @@ func BenchmarkDchestUint64MinLen(b *testing.B) {
 	_ = res
 }
 
-func BenchmarkMohaePutUint64MinLen(b *testing.B) {
+func BenchmarkMohaePutUvarintMinLen(b *testing.B) {
 	buf := make([]byte, 9)
 	var n int
 	b.SetBytes(8)
 	for i := 0; i < b.N; i++ {
-		n = varint.PutUint64(buf, tests[2].decoded)
+		n = uvarint.PutUvarint(buf, tests[2].decoded)
 	}
 	_ = n
 }
 
-func BenchmarkMohaeUint64MinLen(b *testing.B) {
+func BenchmarkMohaeUvarintMinLen(b *testing.B) {
 	var res uint64
 	b.SetBytes(8)
 	for i := 0; i < b.N; i++ {
-		res, _ = varint.Uint64(tests[2].encoded)
+		res, _ = uvarint.Uvarint(tests[2].encoded)
 	}
 	_ = res
 }
 
 // Single encode: use > 1<<56 (slowest)
-func BenchmarkCockroachDBPutUint64MaxLen(b *testing.B) {
+func BenchmarkCockroachDBPutUvarintMaxLen(b *testing.B) {
 	buf := make([]byte, 9)
 	var n int
 	b.SetBytes(8)
@@ -175,7 +175,7 @@ func BenchmarkCockroachDBPutUint64MaxLen(b *testing.B) {
 	_ = n
 }
 
-func BenchmarkCockroachDBUint64MaxLen(b *testing.B) {
+func BenchmarkCockroachDBUvarintMaxLen(b *testing.B) {
 	var res uint64
 	b.SetBytes(8)
 	for i := 0; i < b.N; i++ {
@@ -203,21 +203,21 @@ func BenchmarkDchestUint64MaxLen(b *testing.B) {
 	_ = res
 }
 
-func BenchmarkMohaePutUint64MaxLen(b *testing.B) {
+func BenchmarkMohaePutUvarintMaxLen(b *testing.B) {
 	buf := make([]byte, 9)
 	var n int
 	b.SetBytes(8)
 	for i := 0; i < b.N; i++ {
-		n = varint.PutUint64(buf, tests[17].decoded)
+		n = uvarint.PutUvarint(buf, tests[17].decoded)
 	}
 	_ = n
 }
 
-func BenchmarkMohaeUint64MaxLen(b *testing.B) {
+func BenchmarkMohaeUvarintMaxLen(b *testing.B) {
 	var res uint64
 	b.SetBytes(8)
 	for i := 0; i < b.N; i++ {
-		res, _ = varint.Uint64(tests[17].encoded)
+		res, _ = uvarint.Uvarint(tests[17].encoded)
 	}
 	_ = res
 }
