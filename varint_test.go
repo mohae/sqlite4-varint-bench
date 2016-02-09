@@ -1,4 +1,4 @@
-package sqlite4_bench
+package sqlite4_varint_bench
 
 import (
 	"bytes"

@@ -1,5 +1,5 @@
-# sqlite4-bench
-Benchmarks for sqlite4 variable length integer encoding of 64-bit unsigned integer implementations in Go.
+# sqlite4-varint-bench
+Benchmarks of sqlite4 variable length integer encoding of 64-bit unsigned integer implementations in Go.
 
 See https://sqlite.org/src4/doc/trunk/www/varint.wiki for details of the encoding and decoding rules.
 
@@ -44,6 +44,8 @@ BenchmarkMohaeUvarintMaxLen         	100000000	        10.6 ns/op	 757.42 MB/s	 
 ```
 
 ## Notes:
+These numbers are from running the benchmarks on a VirtualBox VM configured with 1 cpu.
+
 The results of [varuint](https://github.com/dchest/varuint) and [uvarint](https://github.com/mohae/uvarint) should be about the same.  The main difference between the two is that Varuint does boundary checks on the slice while Uvarint will panic if the slice isn't of sufficient size.  Uvarint behaves this way because a slice of insufficient length is considered a programmer error.
 
 The [CockroachDB](https://github.com/cockroachdb/cockroach) implementation of SQLite4's varint is copied from https://github.com/cockroachdb/cockroach/blob/77296d6b6c8c7a6c0d26456067a033a0d33bb730/util/encoding/varint.go and can be found in the `cockroachdb_varint.go` file.  This is necessary because the funcs are not exported.  The CockroachDB implementation is copyrighted by The Cockroach Authors under the Apache License, Version 2.0 (the "License").  A copy of the license may be obtained at

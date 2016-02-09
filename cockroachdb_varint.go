@@ -41,7 +41,7 @@
 //
 // Author: Andrew Bonventre (andybons@gmail.com)
 
-package sqlite4_bench
+package sqlite4_varint_bench
 
 // writeBigEndian writes x into buf as a big-endian n-byte
 // integer. If the buffer is too small, a panic will ensue.
